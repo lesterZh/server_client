@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,8 +29,9 @@ public class MainClient {
 		PrintStream out = new PrintStream(client.getOutputStream());
 		// 获取Socket的输入流，用来接收从服务端发送过来的数据
 		BufferedReader buf = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
+		
 		OutputStream clientStreamOut = client.getOutputStream();
+		
 		
 		//在子线程轮询读数据
 		new Thread() {
@@ -85,10 +87,13 @@ public class MainClient {
 			
 		}.start();
 
+		
 		//设置id和接收者
 		System.out.println("输入用户名：");
 		userId = input.readLine();
 		out.print("userId-"+userId);
+		
+		
 		
 		//发送数据
 		while (flag) {
